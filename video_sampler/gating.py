@@ -2,6 +2,7 @@ import contextlib
 from typing import Any, Literal
 
 import numpy as np
+import torch
 from PIL import Image
 
 from .schemas import EMPTY_GATED_OBJECT, FrameObject, GatedObject
