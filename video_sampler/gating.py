@@ -2,6 +2,8 @@ import contextlib
 from typing import Any, Literal
 
 import numpy as np
+import open_clip
+import torch
 from PIL import Image
 
 from .schemas import EMPTY_GATED_OBJECT, FrameObject, GatedObject
@@ -9,17 +11,14 @@ from .utils import batched
 
 with contextlib.suppress(ImportError):
     import cv2
-with contextlib.suppress(ImportError):
-    import open_clip
-    import torch
 
-    DEVICE = "cpu"
-    # Check if CUDA is available and set the device to 'cuda'
-    if torch.cuda.is_available():
-        DEVICE = "cuda"
-    # Check if MPS (Metal Performance Shaders) is available and set the device to 'mps'
-    if torch.backends.mps.is_available():
-        DEVICE = "mps"
+DEVICE = "cpu"
+# Check if CUDA is available and set the device to 'cuda'
+if torch.cuda.is_available():
+    DEVICE = "cuda"
+# Check if MPS (Metal Performance Shaders) is available and set the device to 'mps'
+if torch.backends.mps.is_available():
+    DEVICE = "mps"
 
 
 def create_model(model_name: str):
